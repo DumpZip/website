@@ -9,12 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #6190FF 0%, #000E7A 100%);
+            --primary-gradient: linear-gradient(135deg, #2b59ff 0%, #000E7A 100%);
             --white: #ffffff;
             --text-dark: #1a1a1a;
             --text-light: #f0f0f0;
             --accent: #6190FF;
             --card-bg: #f8f9fa;
+            --success: #22c55e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,38 +31,91 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         /* Navbar */
-        nav { padding: 25px 0; background: transparent; position: absolute; width: 100%; z-index: 10; text-align: center; }
+        nav { padding: 25px 0; background: transparent; position: absolute; width: 100%; z-index: 100; text-align: center; }
         .logo { font-weight: 900; font-size: 1.8rem; color: white; text-transform: uppercase; letter-spacing: -1px; }
 
         /* HERO SECTION */
         .hero {
             background: var(--primary-gradient);
             color: var(--white);
-            padding: 160px 0 100px;
+            padding: 140px 0 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 650px;
         }
 
-        .hero-text { 
-		max-width: 850px; 
-		margin: 0 auto; 
-		}
-		
-		.hero-h1 {
-		font-size: 7rem;
-		font-weight: 500;
-		}
-		
-		.hero-h2 {
-		font-size: 2rem;
-		font-weight: 500;
-		margin-bottom: 80px;
-		}
+        /* 3-LAYER SANDWICH LOGIC */
+        
+        /* LAYER 1: Background Pills (Lowest z-index) */
+        .floating-pill {
+            position: absolute;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            pointer-events: none;
+            z-index: 5; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .pill-green { background: var(--success); color: white; }
+        .pill-blue { background: rgba(97, 144, 255, 0.45); color: white; border: 1.5px solid rgba(255,255,255,0.2); }
+        .pill-glass { background: rgba(255, 255, 255, 0.12); color: white; border: 1.5px solid rgba(255, 255, 255, 0.2); }
 
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.2rem);
-            line-height: 1.1;
+        .p-1 { top: 15%; left: 15%; transform: rotate(-8deg); }
+        .p-2 { top: 20%; right: 12%; transform: rotate(6deg); filter: blur(2px); opacity: 0.6; }
+        .p-3 { bottom: 15%; left: 18%; transform: rotate(4deg); }
+        .p-4 { bottom: 12%; right: 18%; transform: rotate(-6deg); }
+        .p-5 { top: 48%; left: 8%; transform: rotate(-4deg); filter: blur(3px); opacity: 0.5; }
+        .p-6 { top: 40%; right: 6%; transform: rotate(10deg); }
+        .p-7 { top: 8%; left: 42%; transform: rotate(-2deg); filter: blur(4px); opacity: 0.4; }
+
+        /* LAYER 2: The Shield (Middle z-index) */
+        .legibility-shield {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            height: 100%;
+            z-index: 8;
+            pointer-events: none;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            -webkit-mask-image: radial-gradient(circle, black 20%, transparent 70%);
+            mask-image: radial-gradient(circle, black 20%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 5, 46, 0.4) 0%, transparent 70%);
+        }
+
+        /* LAYER 3: Crisp Text (Highest z-index) */
+        .hero-text-content {
+            position: relative;
+            z-index: 20;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .hero-h1 {
+            font-size: clamp(3rem, 10vw, 7.5rem);
             font-weight: 900;
-            margin-bottom: 40px;
+            line-height: 0.85;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .hero-h2 {
+            font-size: clamp(1.2rem, 3vw, 2.2rem);
+            font-weight: 500;
+            margin-bottom: 60px;
+            opacity: 1;
+            letter-spacing: -0.5px;
         }
 
         .cta-group { 
@@ -72,10 +126,10 @@
             align-items: center; 
         }
 
-        .btn { padding: 18px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.2s; text-align: center; }
-        .btn-primary { background: var(--white); color: #000E7A; }
-        .btn-secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
-        .btn:active { transform: scale(0.95); }
+        .btn { padding: 18px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.2s; text-align: center; }
+        .btn-primary { background: var(--white); color: #000E7A; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px); }
+        .btn:hover { transform: translateY(-3px); }
 
         /* Location Bar */
         .location-bar {
@@ -121,7 +175,6 @@
             font-size: 1.2rem;
         }
 
-        /* Phone Mockup Styling */
         .feature-video {
             flex: 0 0 320px;
             position: relative;
@@ -170,8 +223,9 @@
         footer { background: #00052e; color: var(--white); padding: 80px 0; text-align: center; }
         footer h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 900; }
 
-        /* Responsive adjustments */
+        /* Mobile Adjustments */
         @media (max-width: 900px) {
+            .floating-pill, .legibility-shield { display: none; }
             .feature-row, .feature-row.reverse { 
                 flex-direction: column; 
                 text-align: center; 
@@ -183,8 +237,9 @@
         }
 
         @media (max-width: 600px) {
-            .hero { padding-top: 140px; padding-bottom: 80px; }
-            h1 { font-size: 2.2rem; }
+            .hero { padding: 80px 0; min-height: auto; }
+            .hero-h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            .hero-h2 { font-size: 1.1rem; margin-bottom: 40px; }
             .btn { width: 100%; }
         }
     </style>
@@ -198,10 +253,23 @@
     </nav>
 
     <section class="hero">
+        <!-- LAYER 1: PILLS -->
+        <div class="floating-pill pill-green p-1"><span>●</span> ACCEPT BOOKING</div>
+        <div class="floating-pill pill-glass p-2">RESCHEDULE TRUCKS</div>
+        <div class="floating-pill pill-blue p-3">LIST YOUR TRUCK</div>
+        <div class="floating-pill pill-glass p-4">TRUCK #K007 ACTIVE</div>
+        <div class="floating-pill pill-blue p-5">READY TO HAUL</div>
+        <div class="floating-pill pill-glass p-6">VIEW LIVE MAP</div>
+        <div class="floating-pill pill-green p-7">CONFIRMED</div>
+
+        <!-- LAYER 2: THE SHIELD -->
+        <div class="legibility-shield"></div>
+
+        <!-- LAYER 3: CRISP TEXT -->
         <div class="container">
-            <div class="hero-text">
+            <div class="hero-text-content">
                 <h1 class="hero-h1">Stop Playing Phone Games.</h1>
-				<h2 class="hero-h2">Book dump trucks in one tap with Dump Zip.</h2>
+                <h2 class="hero-h2">Book dump trucks in one tap with Dump Zip.</h2>
                 <div class="cta-group">
                     <a href="#" class="btn btn-primary">Download for iPhone</a>
                     <a href="#" class="btn btn-secondary">Download for Android</a>
@@ -211,7 +279,7 @@
     </section>
 
     <div class="location-bar">
-        <span style="font-style: ; font-weight: 400;">Available for free in</span>  Ohio • Kentucky • Indiana
+        <span style="font-weight: 400;">Available for free in</span>  Ohio • Kentucky • Indiana
     </div>
 
     <section class="features">
@@ -274,7 +342,7 @@
                     <h2>Eliminate the "Maybe."</h2>
                     <p>A "maybe" costs you $500 an hour in idle crew time. With Dump Zip, every booking has a digital paper trail.</p>
                     <p>Drivers receive precise addresses, material types, and contractor contact info immediately upon booking.</p>
-				<h2>Your dispatcher's sick day is no longer a crisis.</h2>
+                <h2>Your dispatcher's sick day is no longer a crisis.</h2>
                     <p>Instead of 50 phone calls, you'll fill your job slots in seconds. Dispatcher out sick? No worries: it's all on Dump Zip, and easy for anyone to pick up in seconds.</p>
                 </div>
             </div>
@@ -284,14 +352,14 @@
     <section class="promise">
         <div class="container">
             <h2>Your Privacy is Our Priority.</h2>
-            <p>We don't sell your data.  You pay your drivers or get paid by contractors exactly how you do today. We just provide the live schedule that makes it all possible.</p>
-			<br />
-			<h2>We don't touch your money.</h2>
+            <p>We don't sell your data. You pay your drivers or get paid by contractors exactly how you do today. We just provide the live schedule that makes it all possible.</p>
+            <br />
+            <h2>We don't touch your money.</h2>
             <p>Payment stays the same as how you do it today. We don't want a cut of your payment. We just provide the live scheduling that makes it all possible.</p>
-			<br />
-			<h2>Questions?</h2>
-			<p>Talk to one of the Dump Zip co-founders today. Email us at hello@dumpzip.com.</p>
-		</div>
+            <br />
+            <h2>Questions?</h2>
+            <p>Talk to one of the Dump Zip co-founders today. Email us at hello@dumpzip.com.</p>
+        </div>
     </section>
 
     <footer>
