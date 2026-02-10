@@ -41,7 +41,21 @@
             text-align: center;
         }
 
-        .hero-text { max-width: 850px; margin: 0 auto; }
+        .hero-text { 
+		max-width: 850px; 
+		margin: 0 auto; 
+		}
+		
+		.hero-h1 {
+		font-size: 7rem;
+		font-weight: 500;
+		}
+		
+		.hero-h2 {
+		font-size: 2rem;
+		font-weight: 500;
+		margin-bottom: 80px;
+		}
 
         h1 {
             font-size: clamp(2.5rem, 6vw, 4.2rem);
@@ -186,7 +200,8 @@
     <section class="hero">
         <div class="container">
             <div class="hero-text">
-                <h1>Stop Playing Phone Games. <br /><span style="font-size: 1.75rem;">Book dump trucks in one tap with Dump Zip.</span></h1>
+                <h1 class="hero-h1">Stop Playing Phone Games.</h1>
+				<h2 class="hero-h2">Book dump trucks in one tap with Dump Zip.</h2>
                 <div class="cta-group">
                     <a href="#" class="btn btn-primary">Download for iPhone</a>
                     <a href="#" class="btn btn-secondary">Download for Android</a>
@@ -196,7 +211,7 @@
     </section>
 
     <div class="location-bar">
-        Available <span style="font-style: italic; ">for free</span> in Ohio • Kentucky • Indiana
+        <span style="font-style: ; font-weight: 400;">Available for free in</span>  Ohio • Kentucky • Indiana
     </div>
 
     <section class="features">
@@ -217,7 +232,7 @@
                     <div class="phone-frame">
                         <div class="video-container">
                             <video autoplay muted loop playsinline>
-                                <source src="media/Recording_contractorCreatingJob.webm" type="video/webm">
+                                <source src="media/ContractorCreateJob_small_v1.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -239,7 +254,7 @@
                     <div class="phone-frame">
                         <div class="video-container">
                             <video autoplay muted loop playsinline>
-                                <source src="media/Recording_truckowneraddtruck.webm" type="video/webm">
+                                <source src="media/AddTruck_Small_v4.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
