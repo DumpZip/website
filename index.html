@@ -6,7 +6,7 @@
     <title>Dump Zip | Stop Playing Phone Games</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #2b59ff 0%, #000E7A 100%);
@@ -14,8 +14,9 @@
             --text-dark: #1a1a1a;
             --text-light: #f0f0f0;
             --accent: #6190FF;
-            --card-bg: #f8f9fa;
+            --card-bg: #f8f9fa; /* Light Gray */
             --success: #22c55e;
+            --danger: #ef4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -49,7 +50,7 @@
 
         /* 3-LAYER SANDWICH LOGIC */
         
-        /* LAYER 1: Background Pills (Lowest z-index) */
+        /* LAYER 1: Background Pills */
         .floating-pill {
             position: absolute;
             padding: 16px 32px;
@@ -76,7 +77,7 @@
         .p-6 { top: 40%; right: 6%; transform: rotate(10deg); }
         .p-7 { top: 8%; left: 42%; transform: rotate(-2deg); filter: blur(4px); opacity: 0.4; }
 
-        /* LAYER 2: The Shield (Middle z-index) */
+        /* LAYER 2: The Shield */
         .legibility-shield {
             position: absolute;
             top: 50%;
@@ -93,7 +94,7 @@
             background: radial-gradient(circle, rgba(0, 5, 46, 0.4) 0%, transparent 70%);
         }
 
-        /* LAYER 3: Crisp Text (Highest z-index) */
+        /* LAYER 3: Crisp Text */
         .hero-text-content {
             position: relative;
             z-index: 20;
@@ -143,8 +144,55 @@
             border-bottom: 1px solid #d0d7ef;
         }
 
-        /* SIDE-BY-SIDE FEATURES */
-        .features { padding: 100px 0; }
+        /* PROMISE SECTION (White Background) */
+        .promise {
+            background: var(--white);
+            padding: 80px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .promise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .promise-card {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .promise-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px auto;
+            color: var(--accent);
+            background: rgba(97, 144, 255, 0.1);
+            padding: 14px;
+            border-radius: 16px;
+            display: block;
+        }
+
+        .promise h3 {
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            color: #000E7A;
+        }
+
+        .promise p {
+            font-size: 1rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        /* FEATURES SECTION (Gray Background) */
+        .features { 
+            padding: 100px 0; 
+            background-color: var(--card-bg); 
+        }
         
         .feature-row {
             display: flex;
@@ -152,6 +200,8 @@
             gap: 60px;
             margin-bottom: 120px;
         }
+
+        .feature-row:last-child { margin-bottom: 0; }
 
         .feature-row.reverse { flex-direction: row-reverse; }
 
@@ -184,8 +234,8 @@
             background: #fff;
             padding: 12px;
             border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 2px solid #eee;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e5e7eb;
         }
 
         .video-container {
@@ -199,29 +249,133 @@
 
         .video-container video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Proof Section */
-        .proof-section { padding: 100px 0; background: var(--card-bg); border-top: 1px solid #eee; }
+        /* PROOF SECTION (White Background) */
+        .proof-section { 
+            padding: 100px 0; 
+            background: var(--white); 
+            border-top: 1px solid #eee; 
+        }
         .proof-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: 60px;
             align-items: center;
         }
-        .proof-image img {
-            width: 100%;
-            border-radius: 20px;
-        }
+.proof-image img {
+    width: 100%;
+    /* Remove the card-like styling */
+    border-radius: 0; 
+    box-shadow: none;
+    /* Apply a shadow that respects the transparent shape of the phone frame */
+    filter: drop-shadow(0 30px 50px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
+}
+
+.proof-image img:hover {
+    transform: translateY(-5px);
+}
+		
+		
         .proof-text h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; color: #000E7A; }
         .proof-text p { margin-bottom: 20px; font-size: 1.1rem; }
 
-        /* No BS Promise */
-        .promise { background: #fff; padding: 100px 0; text-align: center; }
-        .promise h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; }
-        .promise p { max-width: 750px; margin: 0 auto; font-size: 1.2rem; opacity: 0.9; }
-
         /* Footer */
-        footer { background: #00052e; color: var(--white); padding: 80px 0; text-align: center; }
+        footer { 
+            background: #00052e; 
+            color: var(--white); 
+            padding: 80px 0; 
+            text-align: center; 
+        }
         footer h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 900; }
+        
+        /* Signup Form Styling */
+        #signupForm {
+            max-width: 400px;
+            margin: 40px auto 30px auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            text-align: left;
+        }
+        #signupForm h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--white);
+            text-align: center;
+        }
+        #signupForm div {
+            margin-bottom: 15px;
+        }
+        #signupForm label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+        }
+        #signupForm input[type="text"],
+        #signupForm input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background-color: rgba(255,255,255,0.15);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+        #signupForm input[type="text"]:focus,
+        #signupForm input[type="email"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: rgba(255,255,255,0.25);
+        }
+        #signupForm input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        #signupForm button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            background: var(--accent);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        #signupForm button[type="submit"]:hover {
+            background-color: #4a7ffc;
+            transform: translateY(-2px);
+        }
+
+        #responseMessage { 
+            margin-top: 20px; 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: 500;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light); 
+        }
+        #responseMessage.success { 
+            background-color: rgba(34, 197, 94, 0.2);
+            color: var(--success); 
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+        #responseMessage.error { 
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger); 
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
 
         /* Mobile Adjustments */
         @media (max-width: 900px) {
@@ -230,10 +384,17 @@
                 flex-direction: column; 
                 text-align: center; 
                 gap: 40px;
+                margin-bottom: 80px;
             }
             .feature-video { flex: 0 0 auto; width: 280px; }
             .feature-text h2 { font-size: 2rem; }
-            .proof-grid { grid-template-columns: 1fr; text-align: center; }
+            .proof-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            
+            /* Promise Grid Stack on Mobile */
+            .promise-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -241,6 +402,7 @@
             .hero-h1 { font-size: 3.5rem; letter-spacing: -2px; }
             .hero-h2 { font-size: 1.1rem; margin-bottom: 40px; }
             .btn { width: 100%; }
+            #signupForm { padding: 20px; margin-left: 15px; margin-right: 15px; }
         }
     </style>
 </head>
@@ -269,9 +431,10 @@
         <div class="container">
             <div class="hero-text-content">
                 <h1 class="hero-h1">Book your dump trucks in seconds. </h1>
-                <h2 class="hero-h2">Instant confirmations, real-time availability, zero guessing — for contractors & drivers. </h2>                <div class="cta-group">
+                <h2 class="hero-h2">No small talk. No phone calls. </h2>
+                <div class="cta-group">
                     <a href="#" class="btn btn-primary">Download for iPhone</a>
-                    <a href="#" class="btn btn-secondary">Download for Android</a>
+                    <a href="#" class="btn btn-primary">Download for Android</a>
                 </div>
             </div>
         </div>
@@ -280,19 +443,56 @@
     <div class="location-bar">
         <span style="font-weight: 400;">Available for free in</span>  Ohio • Kentucky • Indiana
     </div>
+	
+    <!-- PROMISE SECTION (New Grid Layout) -->
+    <section class="promise">
+        <div class="container">
+            <div class="promise-grid">
+                
+                <!-- Item 1: Privacy -->
+                <div class="promise-card">
+                    <svg class="promise-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <h3>Your Privacy Is Our Priority</h3>
+                    <p>We won't sell your data. Ever.</p>
+                </div>
 
+                <!-- Item 2: Money -->
+                <div class="promise-card">
+                    <svg class="promise-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h3>We Don't Touch Your Payments</h3>
+                    <p>Payments stay exactly how you do them today. We don't want a cut. We just handle the scheduling.</p>
+                </div>
+
+                <!-- Item 3: Contact -->
+                <div class="promise-card">
+                    <svg class="promise-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <h3>Real Humans</h3>
+                    <p>Talk to a co-founder directly. No bots. Email us at <a href="mailto:hello@dumpzip.com" style="color:var(--accent); text-decoration:none; font-weight:700;">hello@dumpzip.com</a>.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
     <section class="features">
         <div class="container">
             
             <!-- Contractor Row -->
             <div class="feature-row">
                 <div class="feature-text">
-                    <h2>For Contractors</h2>
-                    <p><strong>Ditch the phone tag and stop guessing who is showing up.</strong></p>
+                    <h2>Need a truck?</h2>
+                    <p><strong>Ditch the phone tag.</strong></p>
                     <ul>
                         <li><strong>Live Results:</strong> View available trucks in real-time within your zip.</li>
                         <li><strong>One-Tap Booking:</strong> Set dates and materials in under 30 seconds.</li>
-                        <li><strong>Instant Confirmation:</strong> No more "checking in again" — get a yes or no immediately.</li>
+                        <li><strong>Instant Confirmation:</strong> No more small talk.</li>
                     </ul>
                 </div>
                 <div class="feature-video">
@@ -309,12 +509,12 @@
             <!-- Owner Row -->
             <div class="feature-row reverse">
                 <div class="feature-text">
-                    <h2>For Truck Owners</h2>
-                    <p><strong>Zero downtime. Maximize your truck's earnings.</strong></p>
+                    <h2>Have a truck?</h2>
+                    <p><strong>Maximize your earnings.</strong></p>
                     <ul>
                         <li><strong>60-Second Setup:</strong> Add your fleet and truck details instantly.</li>
-                        <li><strong>Automatic Leads:</strong> Fill your week before you even turn the key.</li>
-                        <li><strong>Field Ready:</strong> Built for high-contrast visibility on older phones with weak signals.</li>
+                        <li><strong>Bookings Without Calls:</strong> Booking requests arrive instantly.</li>
+                        <li><strong>Increase earnings:</strong> Maximize each truck's usage.</li>
                     </ul>
                 </div>
                 <div class="feature-video">
@@ -331,6 +531,7 @@
         </div>
     </section>
 
+    <!-- PROOF SECTION -->
     <section class="proof-section">
         <div class="container">
             <div class="proof-grid">
@@ -338,26 +539,12 @@
                     <img src="media/BookingDetail.png" alt="Booking Detail Screen">
                 </div>
                 <div class="proof-text">
-                    <h2>Eliminate the "Maybe."</h2>
-                    <p>A "maybe" costs you $500 an hour in idle crew time.</p>
-                    <p>With Dump Zip, bookings are accepted and confirmed with no phone calls and no maybes.</p>
-                <h2>Your dispatcher's sick day is no longer a crisis.</h2>
-                    <p>With Dump Zip you not only get instant bookings, but the kind of resource anyone can pickup in seconds.</p>
+                    <h2>Save time. Save money. </h2>
+                    <p>With Dump Zip, bookings are accepted and confirmed with no phone calls.</p>
+                    <h2>Your dispatcher's sick day is no longer a crisis.</h2>
+                    <p>With Dump Zip you not only get instant bookings, but a business resource anyone in your company can pickup in seconds.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="promise">
-        <div class="container">
-            <h2>Your Privacy is Our Priority.</h2>
-            <p>We don't sell your data. We never will.</p>
-            <br />
-            <h2>We don't touch your money.</h2>
-            <p>Payment stays the same as how you do it today. We don't want a cut. We just provide the live scheduling that makes it all possible.</p>
-            <br />
-            <h2>Questions? Let's talk!</h2>
-            <p>Talk to one of the Dump Zip co-founders today. Email us at hello@dumpzip.com.</p>
         </div>
     </section>
 
@@ -366,13 +553,74 @@
             <h2>Book Your Week Before Breakfast</h2>
             <div class="cta-group" style="justify-content: center;">
                 <a href="#" class="btn btn-primary">Download For iPhone</a>
-                <a href="#" class="btn btn-secondary">Download For Android</a>
+                <a href="#" class="btn btn-primary">Download For Android</a>
             </div>
+
+            <!-- SIGN-UP FORM HERE -->
+            <form id="signupForm">
+                <h3>Get Notified When We Launch In Your State!</h3>
+                <div>
+                    <label for="formName">Name:</label>
+                    <input type="text" id="formName" name="name" placeholder="John Doe" required>
+                </div>
+                <div>
+                    <label for="formEmail">Email:</label>
+                    <input type="email" id="formEmail" name="email" placeholder="john.doe@example.com" required>
+                </div>
+                <div>
+                    <label for="formStateCode">State (e.g., OH, KY):</label>
+                    <input type="text" id="formStateCode" name="stateCode" maxlength="2" pattern="[A-Za-z]{2}" title="Two-letter state code" placeholder="OH" required>
+                </div>
+                <button type="submit">Join the Waitlist</button>
+                <div id="responseMessage"></div>
+            </form>
+
             <p style="margin-top: 50px; opacity: 0.5; font-size: 0.8rem;">
                 © <script>document.write(new Date().getFullYear());</script> Dump Zip, LLC. <br> Built for local haulers. No middlemen. No hidden fees.
             </p>
         </div>
     </footer>
+
+    <script>
+        const form = document.getElementById('signupForm');
+        const responseMessage = document.getElementById('responseMessage');
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5-eb0trVufzyQ1bdbMQJivFm_1RLu247cOQnzjmjLpQiujkOKc4rapllscld75kYK/exec';
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); 
+            responseMessage.textContent = 'Submitting...';
+            responseMessage.className = ''; 
+
+            const name = document.getElementById('formName').value;
+            const email = document.getElementById('formEmail').value;
+            const stateCode = document.getElementById('formStateCode').value.toUpperCase();
+
+            try {
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, stateCode }),
+                });
+
+                const result = await response.json(); 
+
+                if (result.success) {
+                    responseMessage.textContent = result.message;
+                    responseMessage.className = 'success';
+                    form.reset(); 
+                } else {
+                    responseMessage.textContent = 'Error: ' + result.message;
+                    responseMessage.className = 'error';
+                }
+
+            } catch (error) {
+                responseMessage.textContent = 'An unexpected error occurred. Please try again.';
+                responseMessage.className = 'error';
+                console.error('Fetch error:', error);
+            }
+        });
+    </script>
 
 </body>
 </html>
