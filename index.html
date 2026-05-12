@@ -433,7 +433,101 @@
                 gap: 50px;
             }
         }
-		
+
+
+
+       #signupForm {
+            max-width: 450px;
+            margin: 0 auto 20px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05); /* Subtler than before */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; /* Matching the phone-frame radius */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            text-align: center;
+        }
+
+        #signupForm h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        #signupForm p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        #signupForm input[type="email"] {
+            width: 100%;
+            padding: 18px 20px;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        #signupForm input[type="email"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 4px rgba(97, 144, 255, 0.2);
+        }
+
+        #signupForm button[type="submit"] {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12px;
+            background: var(--accent);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #signupForm button[type="submit"]:hover:not(:disabled) {
+            transform: translateY(-3px);
+            background-color: #4a7ffc;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        #signupForm button[type="submit"]:active:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        #signupForm button[type="submit"]:disabled {
+            background-color: #334155;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #message { 
+            margin-top: 15px; 
+            min-height: 24px; /* Prevents layout jump */
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+
     </style>
 </head>
 <body>
@@ -584,7 +678,61 @@
     </section>
 
 <footer>
+
         <div class="container">
+		
+           <div id="signupForm">
+            <h3>Get Early Access</h3>
+            <p>Join the waitlist for the launch in KY, OH, and IN.</p>
+            
+            <form id="waitlistForm">
+                <div class="input-group">
+                    <input type="email" name="email" id="emailInput" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" id="submitBtn">Notify Me On Launch</button>
+            </form>
+            <div id="message"></div>
+        </div>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz48bq75bDEh3w0ULwMIRuShwhSCwM0jLUFnsHgKeyPE7opaUaVAYyBFwAE7rJHcFdZ/exec';
+    
+    // 1. Target the actual FORM ID, not the DIV wrapper
+    const form = document.getElementById('waitlistForm'); 
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('message');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        btn.disabled = true;
+        msg.style.color = "white"; // Ensure text is visible
+        msg.innerText = "Submitting...";
+
+        const formData = new URLSearchParams();
+        // 2. Access the value via the name attribute of the input
+        formData.append('email', form.email.value);
+
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        })
+        .then(() => {
+            msg.style.color = "#22c55e"; // Success green
+            msg.innerText = "Thank you! You have been added.";
+            form.reset();
+            btn.disabled = false; // Re-enable in case they want to add another
+        })
+        .catch(error => {
+            msg.style.color = "#ef4444"; // Danger red
+            msg.innerText = "Error: Please try again.";
+            btn.disabled = false;
+            console.error('Error!', error.message);
+        });
+    });
+</script>
+
+
+		
             <h2>Questions? <a href="mailto:hello@dumpzip.com" style="color:var(--accent); text-decoration:none; font-weight:700;">hello@dumpzip.com</a></h2>
             <div class="cta-group" style="justify-content: center; margin-bottom: 40px;">
                 <a href="#" class="btn btn-primary">Coming Soon to iPhone</a>
