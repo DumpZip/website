@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Tool-Kit | Dump Zip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo dark">
+            <img src="media/logo_transparent_150x150.png" alt="Dump Zip">
+            Dump Zip
+        </a>
+    </div>
+</nav>
+
+<div class="container w-narrow" style="text-align: center; padding-top: 0;">
+    <header style="margin-bottom: 40px;">
+        <h1 style="font-size: 2.2rem; font-weight: 900; color: #000E7A; letter-spacing: -1px; margin-bottom: 10px;">Onboard Your Drivers</h1>
+        <p style="font-size: 1.1rem; color: #666; font-weight: 500;">Complete these 3 steps to see your drivers in the app.</p>
+    </header>
+
+    <!-- STEP 1: THE LINK -->
+    <span class="step-label">Step 1: Your Invite Link</span>
+    <div class="instruction-card" onclick="copyText('https://dumpzip.com/driver-setup.html', 'Link copied to clipboard!')">
+        <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+        <span style="font-family: monospace; font-size: 1.2rem; font-weight: 700; color: #000E7A;">dumpzip.com/driver-setup.html</span>
+        <p style="margin-top:10px; font-size: 0.9rem; color: #666;">Tap anywhere to copy this link. Send this to all your drivers.</p>
+    </div>
+
+    <!-- STEP 2: THE SCRIPT -->
+    <span class="step-label">Step 2: Copy this Message</span>
+    <div class="instruction-card" onclick="copyText('We are moving to Dump Zip for scheduling. You must sign up and add your trucks here: https://dumpzip.com/driver-setup.html', 'Message copied! Now paste it in your text thread.')">
+        <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+        <span style="font-size: 1.1rem; font-weight: 500; font-style: italic; color: #333;">"We are moving to Dump Zip for scheduling. You must sign up and add your trucks here: dumpzip.com/driver-setup.html"</span>
+        <p style="margin-top:10px; font-size: 0.9rem; color: #666;">Tap to copy this message to your group chat.</p>
+    </div>
+
+    <!-- STEP 3: THE VISUAL GOAL -->
+    <span class="step-label">Step 3: When are they ready?</span>
+    <p style="margin-bottom: 15px; font-size: 0.95rem; color: #444; text-align: left;">A driver is not "Ready to Book" until they have completed these two items in their profile:</p>
+    
+    <div class="status-pill">
+        <div class="check-circle">✓</div>
+        <span>Trucks Added (Axle/Bed type)</span>
+    </div>
+    <div class="status-pill">
+        <div class="check-circle">✓</div>
+        <span>Parking Location Set</span>
+    </div>
+
+    <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Once they do this, they will automatically appear in your <strong>"Available Trucks"</strong> list in the app.</p>
+
+    <a href="tel:1234567890" class="btn btn-onboarding">Call for Help Setting Up Drivers</a>
+
+    <footer class="light" style="border-top: none;">
+        © <script>document.write(new Date().getFullYear());</script> Dump Zip, LLC. <br>
+        Built for local haulers.
+    </footer>
+</div>
+
+<div id="toast">Message Copied!</div>
+
+<script>
+    function copyText(text, message) {
+        // 1. Capture the element that was clicked
+        const card = event.currentTarget;
+        const toast = document.getElementById('toast');
+
+        // 2. Perform the copy
+        navigator.clipboard.writeText(text).then(() => {
+            // 3. Show feedback
+            toast.innerText = message;
+            toast.style.display = 'block';
+            card.style.borderColor = 'var(--success)'; // Use the success green from CSS
+            
+            // 4. THE FIX: Hide after 2 seconds
+            setTimeout(() => {
+                toast.style.display = 'none';
+                card.style.borderColor = 'var(--border-color)'; // Reset to standard border
+            }, 2000); 
+        });
+    }
+</script>
+
+</body>
+</html>

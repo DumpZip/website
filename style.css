@@ -1,0 +1,219 @@
+/* --- 1. DESIGN TOKENS --- */
+:root {
+    --primary-gradient: linear-gradient(135deg, #2b59ff 0%, #000E7A 100%);
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-light: #f0f0f0;
+    --accent: #6190FF;
+    --card-bg: #f8f9fa;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --border-color: #d0d7ef;
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* --- 2. GLOBAL RESET & BASE --- */
+/* These must stay at the TOP so classes can override them */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Structural lists (Nav/Footers) must be clean by default */
+ul { list-style: none; padding: 0; margin: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--white);
+    overflow-x: hidden;
+    overflow-wrap: break-word; 
+}
+
+/* --- 3. GLOBAL NARRATIVE LISTS --- */
+/* This section intentionally overrides the 'ul' reset above for text-heavy content */
+.narrative ul, 
+.legal-body ul { 
+    margin-bottom: 20px; 
+    padding-left: 25px; 
+    list-style-type: disc; 
+}
+
+.narrative li, 
+.legal-body li { 
+    margin-bottom: 12px; 
+    display: list-item; 
+}
+
+/* --- 4. LAYOUT CONTAINERS --- */
+.container { width: 100%; margin: 0 auto; padding: 0 20px; }
+.w-wide { max-width: 1200px; }   /* Home/Marketing Grid */
+.w-med { max-width: 850px; }    /* Legal / Terms of Service */
+.w-narrow { max-width: 650px; } /* Onboarding / Support / Tools */
+
+/* --- 5. NAVIGATION & LOGO --- */
+nav { padding: 25px 0; width: 100%; z-index: 100; text-align: center; }
+nav.abs { position: absolute; background: transparent; }
+
+.logo {
+    font-weight: 900; font-size: 1.8rem; color: var(--white);
+    text-transform: uppercase; letter-spacing: -1px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.logo img { width: 40px; height: 40px; object-fit: contain; }
+.logo.dark { color: #000E7A; font-size: 1.5rem; }
+
+/* --- 6. HERO SECTION (Landing Page) --- */
+.hero {
+    background: var(--primary-gradient); color: var(--white);
+    padding: 140px 0 100px; text-align: center;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; min-height: 650px;
+}
+.floating-pill {
+    position: absolute; padding: 16px 32px; border-radius: 100px;
+    font-weight: 700; font-size: 1.1rem; white-space: nowrap;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4); pointer-events: none; z-index: 5;
+    display: flex; align-items: center; gap: 12px;
+}
+.pill-green { background: var(--success); color: white; }
+.pill-blue { background: rgba(97, 144, 255, 0.45); color: white; border: 1.5px solid rgba(255,255,255,0.2); }
+.pill-glass { background: rgba(255, 255, 255, 0.12); color: white; border: 1.5px solid rgba(255, 255, 255, 0.2); }
+
+/* Placement for Pills */
+.p-1 { top: 15%; left: 15%; transform: rotate(-8deg); }
+.p-2 { top: 20%; right: 12%; transform: rotate(6deg); filter: blur(2px); opacity: 0.6; }
+.p-3 { bottom: 15%; left: 18%; transform: rotate(4deg); }
+.p-4 { bottom: 12%; right: 18%; transform: rotate(-6deg); }
+.p-5 { top: 48%; left: 8%; transform: rotate(-4deg); filter: blur(3px); opacity: 0.5; }
+.p-6 { top: 40%; right: 6%; transform: rotate(10deg); }
+.p-7 { top: 8%; left: 42%; transform: rotate(-2deg); filter: blur(4px); opacity: 0.4; }
+
+.legibility-shield {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%; 
+    height: 100%;
+    z-index: 8;
+    pointer-events: none;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    -webkit-mask-image: radial-gradient(circle, black 20%, transparent 70%);
+    mask-image: radial-gradient(circle, black 20%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 5, 46, 0.4) 0%, transparent 70%);
+}
+.hero-text-content {
+    position: relative;
+    z-index: 20;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.hero-h1 { font-size: clamp(3rem, 10vw, 7.5rem); font-weight: 900; line-height: 1; letter-spacing: -4px; margin-bottom: 25px; text-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.hero-h2 { font-size: clamp(1.2rem, 3vw, 2.2rem); font-weight: 500; margin-bottom: 60px; letter-spacing: -0.5px; }
+
+/* --- 7. MARKETING BLOCKS --- */
+.location-bar { background: #f0f4ff; padding: 20px; text-align: center; font-weight: 700; color: #000E7A; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #d0d7ef; }
+
+.promise { background: var(--white); padding: 80px 0; border-bottom: 1px solid #eee; }
+.promise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; align-items: flex-start; }
+.promise-card { text-align: center; padding: 10px; }
+.promise-icon { width: 56px; height: 56px; margin: 0 auto 20px auto; color: var(--accent); background: rgba(97, 144, 255, 0.1); padding: 14px; border-radius: 16px; display: block; }
+.promise h3 { font-size: 1.25rem; font-weight: 900; margin-bottom: 12px; color: #000E7A; }
+.promise p { font-size: 0.95rem; opacity: 0.8; color: #444; }
+
+.features { padding: 100px 0; background-color: var(--card-bg); }
+.feature-row { display: flex; align-items: center; gap: 60px; margin-bottom: 120px; }
+.feature-row.reverse { flex-direction: row-reverse; }
+.feature-text { flex: 1; }
+.feature-text h2 { font-size: 2.5rem; font-weight: 900; color: #000E7A; margin-bottom: 20px; }
+.feature-text p { font-size: 1.2rem; margin-bottom: 25px; }
+.feature-text li { margin-bottom: 15px; padding-left: 30px; position: relative; font-weight: 500; }
+.feature-text li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 900; font-size: 1.2rem; }
+
+.feature-video { flex: 0 0 320px; position: relative; }
+.phone-frame { background: #fff; padding: 12px; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); border: 2px solid #e5e7eb; }
+.video-container { width: 100%; border-radius: 10px; overflow: hidden; background: #eee; aspect-ratio: 9/16; display: block; }
+.video-container video { width: 100%; height: 100%; object-fit: cover; }
+
+.proof-section { padding: 100px 0; background: var(--white); border-top: 1px solid #eee; }
+.proof-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+.proof-image img { width: 100%; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.3)); transition: transform 0.3s ease; }
+.proof-text h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; color: #000E7A; }
+
+/* --- 8. BUTTONS --- */
+.btn { padding: 18px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.2s; text-align: center; display: inline-block; }
+.btn-primary { background: var(--white); color: #000E7A; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.btn-secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px); }
+.btn-onboarding { background: var(--primary-gradient); color: white; width: 100%; margin-top: 40px; }
+.btn:hover { transform: translateY(-3px); }
+
+/* --- 9. ONBOARDING & TOOL-KIT CARDS --- */
+.step-label { font-weight: 900; text-transform: uppercase; font-size: 0.85rem; color: var(--accent); letter-spacing: 1px; margin-bottom: 12px; display: block; text-align: left; }
+.instruction-card { 
+    background: var(--card-bg); 
+    border: 2px solid var(--border-color); 
+    border-radius: 20px; 
+    padding: 30px; 
+    margin-bottom: 30px; 
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+.instruction-card:hover { border-color: var(--accent); background: #f0f4ff; }
+.copy-icon { position: absolute; top: 30px; right: 30px; color: var(--accent); width: 24px; height: 24px; }
+
+.status-pill { 
+    display: flex; align-items: center; gap: 12px; background: #fff; padding: 16px 20px; 
+    border-radius: 12px; border: 1.5px solid #eee; font-weight: 700; margin-bottom: 10px;
+}
+.check-circle { width: 24px; height: 24px; background: var(--success); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
+/* --- 10. LEGAL & POLICY STYLES --- */
+.legal-body { line-height: 1.7; padding: 60px 0; }
+.legal-body h1 { font-size: 2.5rem; font-weight: 900; color: #000E7A; margin-bottom: 10px; }
+.legal-body h2 { font-size: 1.5rem; font-weight: 800; color: #000E7A; margin-top: 40px; margin-bottom: 15px; }
+.last-updated { color: #666; font-size: 0.95rem; margin-bottom: 40px; border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; }
+.highlight-box { background-color: #f0f4ff; border-radius: 12px; padding: 25px; margin: 30px 0; border: 1px solid #d0d7ef; }
+.back-link { display: inline-block; margin-bottom: 30px; color: #2b59ff; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.all-caps { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
+
+/* --- 11. WAITLIST FORMS --- */
+#signupForm {
+    max-width: 450px; margin: 0 auto 20px auto; padding: 40px;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); text-align: center;
+}
+#signupForm h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: var(--white); letter-spacing: -0.5px; }
+#signupForm p { font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 25px; }
+#signupForm input[type="email"] {
+    width: 100%; padding: 18px 20px; border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px; background-color: rgba(0, 0, 0, 0.2); color: var(--white); font-size: 1rem; margin-bottom: 15px;
+}
+#signupForm button[type="submit"] {
+    width: 100%; padding: 18px; border-radius: 12px; background: var(--accent); color: var(--white);
+    font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.2s;
+}
+
+/* --- 12. FOOTERS --- */
+footer { background: #00052e; color: var(--white); padding: 80px 0; text-align: center; }
+footer h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 900; }
+footer.light { background: transparent; color: #888; padding: 40px 0; border-top: 1px solid #eee; }
+
+/* --- 13. FEEDBACK UI --- */
+#toast { 
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); 
+    background: #000E7A; color: white; padding: 12px 24px; border-radius: 50px; 
+    font-weight: 700; display: none; z-index: 1000; box-shadow: var(--shadow);
+}
+
+/* --- 14. MOBILE RESPONSIVENESS --- */
+@media (max-width: 1024px) { .promise-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
+@media (max-width: 900px) {
+    .floating-pill, .legibility-shield { display: none; }
+    .hero { min-height: auto; padding: 80px 0; }
+    .hero-h1 { font-size: 3.5rem; }
+    .feature-row, .feature-row.reverse { flex-direction: column; text-align: center; gap: 40px; margin-bottom: 80px; }
+    .proof-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+}
+@media (max-width: 600px) { .promise-grid { grid-template-columns: 1fr; } .btn { width: 100%; } }
