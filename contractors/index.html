@@ -28,16 +28,15 @@
 
     <!-- STEP 1: THE LINK -->
     <span class="step-label">Step 1: Copy This Link</span>
-    <div class="instruction-card" onclick="copyText('https://dumpzip.com/drivers', 'Link copied to clipboard!')">
-        <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+<div class="instruction-card" onclick="copyText(this, 'https://dumpzip.com/drivers', 'Link copied to clipboard!')">        <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
         <span style="font-family: monospace; font-size: 1.2rem; font-weight: 700; color: #000E7A;">dumpzip.com/drivers</span>
         <p style="margin-top:10px; font-size: 0.9rem; color: #666;">Tap anywhere to copy this link. <strong>Send this link to all your drivers.</strong></p>
     </div>
 
     <!-- STEP 2: THE SCRIPT -->
     <span class="step-label">Step 2: Send It To Your Drivers</span>
-    <div class="instruction-card" onclick="copyText('We are moving to Dump Zip for scheduling all our dump trucks. Sign up in 60 seconds. It's free: dumpzip.com/drivers', 'Message copied! Now paste it in your text thread.')">
-        <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+<!-- Fixed Step 2 Line -->
+<div class="instruction-card" onclick="copyText(this, 'We are moving to Dump Zip for scheduling all our dump trucks. Sign up in 60 seconds. It\'s free: dumpzip.com/drivers', 'Message copied! Now paste it in your text thread.')">        <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
         <span style="font-size: 1.1rem; font-weight: 500; font-style: italic; color: #333;">"We are moving to Dump Zip for scheduling all our dump trucks. Sign up in 60 seconds. It's free: dumpzip.com/drivers"</span>
         <p style="margin-top:10px; font-size: 0.9rem; color: #666;">Send this in an email or text.</p>
     </div>
@@ -68,23 +67,20 @@
 <div id="toast">Message Copied!</div>
 
 <script>
-    function copyText(text, message) {
-        // 1. Capture the element that was clicked
-        const card = event.currentTarget;
+    function copyText(card, text, message) {
         const toast = document.getElementById('toast');
 
-        // 2. Perform the copy
         navigator.clipboard.writeText(text).then(() => {
-            // 3. Show feedback
             toast.innerText = message;
             toast.style.display = 'block';
-            card.style.borderColor = 'var(--success)'; // Use the success green from CSS
+            card.style.borderColor = 'var(--success)'; 
             
-            // 4. THE FIX: Hide after 2 seconds
             setTimeout(() => {
                 toast.style.display = 'none';
-                card.style.borderColor = 'var(--border-color)'; // Reset to standard border
+                card.style.borderColor = 'var(--border-color)'; 
             }, 2000); 
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
         });
     }
 </script>
